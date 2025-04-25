@@ -29,3 +29,8 @@ struct Block {
     y: i32,
 }
 
+pub struct Snake {
+    direction: Direction,
+    body: LinkedList<Block>,
+    tail: Option<Block>,
+}
