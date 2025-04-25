@@ -23,3 +23,9 @@ impl Direction {
         }
     }
 }
+#[derive(Debug, Clone)]
+struct Block {
+    x: i32,
+    y: i32,
+}
+
