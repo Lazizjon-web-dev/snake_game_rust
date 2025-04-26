@@ -20,5 +20,5 @@ fn main() {
             .build()
             .unwrap();
 
-    println!("Hello, world!");
+    let mut game = Game::new(width, height);
 }
