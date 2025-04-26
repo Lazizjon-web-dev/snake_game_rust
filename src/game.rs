@@ -38,6 +38,25 @@ impl Game {
         }
     }
 
+    pub fn key_pressed(&mut self, key: Key) {
+        if self.game_over {
+            return;
+        }
+        let dir = match key {
+            Key::Up => Some(Direction::Up),
+            Key::Down => Some(Direction::Down),
+            Key::Left => Some(Direction::Left),
+            Key::Right => Some(Direction::Right),
+            _ => None
+        };
+
+        if dir.unwrap() == self.snake.head_direction().opposite() {
+            return;
+        }
+         
+        self.update_snake(dir);
+    }
+
     pub fn draw(&self, con: &Context, g: &mut G2d) {
         self.snake.draw(con, g);
 
