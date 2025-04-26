@@ -21,4 +21,17 @@ fn main() {
             .unwrap();
 
     let mut game = Game::new(width, height);
+    while let Some(event) = window.next() {
+        if let Some(Button::Keyboard(key)) = event.press_args() {
+            game.key_pressed(key);
+        }
+        window.draw_2d(&event, |c, g, _| {
+            clear(BACK_COLOR, g);
+            game.draw(&c, g);
+        });
+
+        event.update(|arg| {
+            game.update(arg.dt);
+        });
+    }
 }
