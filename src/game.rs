@@ -74,6 +74,23 @@ impl Game {
         }
     }
 
+    fn check_eating(&mut self) {
+        let (head_x, head_y): (i32,i32) = self.snake.head_position();
+        if self.food_exists && self.food_x == head_x && self.food_y == head_y {
+            self.food_exists = false;
+            self.snake.restore_tail();
+        }
+    }
+
+    fn check_if_snake_alive(&self, dir: Option<Direction>) -> bool {
+        let (next_x, next_y) = self.snake.next_head(dir);
+
+        if self.snake.overlap_tail(next_x, next_y) {
+            return false;
+        }
+        next_x > 0 && next_y > 0 && next_x < self.width - 1 && next_y < self.height -1
+    }
+
     fn add_food(&mut self) {
         let mut rng = thread_rng();
 
