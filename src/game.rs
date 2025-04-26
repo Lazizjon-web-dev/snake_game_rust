@@ -54,4 +54,19 @@ impl Game {
             draw_rectangle(GAMEOVER_COLOR, 0, 0, self.width, self.height, con, g);
         }
     }
+
+    fn add_food(&mut self) {
+        let mut rng = thread_rng();
+
+        let mut new_x = rng.gen_range(1..self.width);
+        let mut new_y = rng.gen_range(1..self.height);
+        while self.snake.overlap_tail(new_x, new_y){
+            new_x = rng.gen_range(1..self.width);
+            new_y = rng.gen_range(1..self.height);
+        }
+
+        self.food_x = new_x;
+        self.food_y = new_y;
+        self.food_exists = true;
+    }
 }
